@@ -29,12 +29,17 @@ const MultiPathOptimizationMap = () => {
         const script = document.createElement('script');
         script.async = true;
         
-        // API 키 설정
+        // API 키 설정 및 디버깅
         const KAKAO_MAP_API_KEY = process.env.REACT_APP_KAKAO_MAP_API_KEY;
-        console.log('API Key:', KAKAO_MAP_API_KEY ? '키가 존재함' : '키가 없음');
+        console.log('환경 변수 확인:', {
+          'REACT_APP_KAKAO_MAP_API_KEY 존재 여부': !!process.env.REACT_APP_KAKAO_MAP_API_KEY,
+          'process.env 키 목록': Object.keys(process.env).filter(key => key.startsWith('REACT_APP_')),
+          'NODE_ENV': process.env.NODE_ENV
+        });
         
         if (!KAKAO_MAP_API_KEY) {
           console.error('Kakao Maps API key is not defined');
+          alert('카카오맵 API 키가 설정되지 않았습니다. 환경 변수를 확인해주세요.');
           return;
         }
         
