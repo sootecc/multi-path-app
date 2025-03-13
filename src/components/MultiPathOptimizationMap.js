@@ -28,8 +28,17 @@ const MultiPathOptimizationMap = () => {
         console.log('Loading Kakao Maps API...');
         const script = document.createElement('script');
         script.async = true;
-        // 프로토콜 추가 (http: 또는 https:)
-        script.src = `${window.location.protocol}//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&libraries=services&autoload=false`;
+        
+        // API 키 설정
+        const KAKAO_MAP_API_KEY = process.env.REACT_APP_KAKAO_MAP_API_KEY;
+        console.log('API Key:', KAKAO_MAP_API_KEY ? '키가 존재함' : '키가 없음');
+        
+        if (!KAKAO_MAP_API_KEY) {
+          console.error('Kakao Maps API key is not defined');
+          return;
+        }
+        
+        script.src = `${window.location.protocol}//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_API_KEY}&libraries=services&autoload=false`;
         
         script.onerror = () => {
           console.error('Failed to load Kakao Maps API');
